@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+/* .background{
+    background-color: rgb(78, 116, 150);
+} */
+
+.foreground h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.back img{
+    width: 400px;
+    cursor: pointer;
+}
+.back::-webkit-scrollbar{
+    display: none;
+}
+.name{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+p{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+nav h2{
+    cursor: pointer;
+}
+/* .character img{
+    filter: grayscale(1);
+} */
+@media screen and (min-width: 736px) {
+    
+    .character img:not(:hover){
+        filter: grayscale(1) blur(10px);
+    }
+}
