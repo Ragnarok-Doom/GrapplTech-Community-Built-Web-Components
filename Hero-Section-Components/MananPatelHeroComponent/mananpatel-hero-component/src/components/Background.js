@@ -96,6 +96,7 @@ function Background() {
     ]
     const [selectedCharacter, setSelectedCharacter] = useState(characters[0]);
     const [mobSlider, setMobSlider] = useState(false);
+    const [charForward, setCharForward] = useState()
 
     useEffect(() => {
         if (darkMode) {
@@ -105,8 +106,30 @@ function Background() {
         }
     }, [darkMode]);
 
+    const [count, setCount] = useState(1)
+
+    const handleForward = () => {
+        if (count < 4) {
+            setCount(prev => prev + 1)
+            setSelectedCharacter(characters[count])
+        } else if (count === 4) {
+            setCount(1)
+            setSelectedCharacter(characters[0])
+        }
+    };
+
+    const handleBackward = () => {
+        if (count > 1) {
+            setCount(prev => prev - 1)
+            setSelectedCharacter(characters[count - 2])
+        } else if (count === 1) {
+            setCount(4)
+            setSelectedCharacter(characters[3])
+        }
+    }
+
   return (
-    <div className=' w-[100vw] h-[100vh] bg-slate-50 dark:bg-gray-900 dark:text-white overflow-hidden relative'>
+    <div className='w-[100vw] h-[100vh] bg-slate-50 dark:bg-gray-900 dark:text-white overflow-hidden relative'>
         {/* FOREGROUND */}
         <div className='foreground absolute w-full h-full flex justify-center items-center overflow-hidden'>
             <h1 className=' font-black text-8xl md:text-[220px] opacity-[.1]'>{selectedCharacter.name}</h1>
@@ -169,9 +192,9 @@ function Background() {
                 {/* 1ST */}
                 <img src={selectedCharacter.img1} className={` h-[60vh] md:h-[80vh] bottom-[170px] md:bottom-20 absolute ${selectedCharacter.id == 4 ? ' left-[10%] md:left-[25%]' : ' left-[15%] md:left-[32%]'} -translate-x-[50%] z-30`} />
                 {/* 2ND */}
-                <img src={selectedCharacter.img2} className={` h-[65vh] md:h-[83vh] bottom-[120px] md:bottom-10 absolute ${selectedCharacter.id == 4 ? ' left-[25%] md:left-[35%]' : ' left-[33%] md:left-[40%]'} -translate-x-[50%] z-40`} />
+                <img src={selectedCharacter.img2} className={` h-[65vh] md:h-[83vh] bottom-[120px] md:bottom-10 absolute ${selectedCharacter.id == 4 ? ' left-[25%] md:left-[35%]' : ' left-[30%] md:left-[40%]'} -translate-x-[50%] z-40`} />
                 {/* CENTER */}
-                <img src={selectedCharacter.img3} className={`h-[70vh] ${selectedCharacter.id == 3 ? ' h-[104%] md:h-[100vh]' : 'md:h-[85vh]'} bottom-[80px] md:bottom-0 absolute left-[50%] -translate-x-[50%] z-50`} />
+                <img src={selectedCharacter.img3} className={`h-[70vh] ${selectedCharacter.id == 3 ? ' h-[700px] md:h-[100vh]' : 'md:h-[85vh]'} bottom-[80px] md:bottom-0 absolute left-[50%] -translate-x-[50%] z-50`} />
                 {/* 4TH */}
                 <img src={selectedCharacter.img4} className={` h-[65vh] md:h-[83vh] bottom-[120px] md:bottom-10 absolute left-[70%] md:left-[60%] -translate-x-[50%] z-40`} />
                 {/* 5TH */}
@@ -198,11 +221,11 @@ function Background() {
                 </div>
             </div>
         </div>
-        <div className=' absolute bottom-0 left-0 flex  w-full gap-5 p-2 items-center'>
+        <div className=' absolute bottom-0 left-0 flex justify-between md:justify-normal  w-full gap-5 p-2 items-center'>
             <span className=' font-mono backdrop-blur-md cursor-pointer border bg-black text-white border-black px-6 py-3 flex justify-center items-center gap-3 dark:bg-white dark:text-black' onClick={() => setStep(!step)}><FaPlay /> { step == true ? 'AVATAR' : 'BACK'}</span>
             <div className=' flex gap-3'>
-                <span className=' text-3xl border rounded-full w-[80px] h-[80px] flex justify-center items-center hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black border-black cursor-pointer backdrop-blur-sm'>&larr;</span>
-                <span className=' text-3xl border rounded-full w-[80px] h-[80px] flex justify-center items-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black dark:border-white border-black cursor-pointer backdrop-blur-sm'>&rarr;</span>
+                <span className=' text-3xl border rounded-full w-[80px] h-[80px] flex justify-center items-center hover:bg-black hover:text-white dark:border-white dark:hover:bg-white dark:hover:text-black border-black cursor-pointer backdrop-blur-sm' onClick={handleBackward}>&larr;</span>
+                <span className=' text-3xl border rounded-full w-[80px] h-[80px] flex justify-center items-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black dark:border-white border-black cursor-pointer backdrop-blur-sm' onClick={handleForward}>&rarr;</span>
             </div>
         </div>
     </div>
